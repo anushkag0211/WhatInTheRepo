@@ -4,26 +4,24 @@ def build_prompt(query, retrieved_chunks):
 
     context = ""
 
-    for c in retrieved_chunks:
-        context += f"\nFile: {c['file']}\nCode:\n{c['text']}\n---\n"
+    for c in retrieved_chunks[:2]:
+        context += f"\nFile: {c['file']}\n{c['text']}\n"
 
     return f"""
-You are a senior software engineer.
+You are a senior software engineer analyzing code.
 
-Answer clearly in 5–7 lines.
+Answer the question clearly in 3-5 sentences.
 
-Do NOT repeat code.
-Do NOT stop mid-sentence.
+Only use the provided code.
+Do not generate extra questions or sections.
+If the answer is not in the code, say: "Not enough information."
 
-If unsure, say "Not enough information."
+Question: {query}
 
-QUESTION:
-{query}
-
-CODE:
+Code:
 {context}
 
-ANSWER:
+Answer:
 """
 
 
