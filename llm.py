@@ -11,6 +11,7 @@ def generate_answer(prompt):
         prompt,
         max_new_tokens=300,
         temperature=0.2,
+        do_sample=False, // So that answer doesn't keep repeating thinking to be creative.
         return_full_text=False
     )
 
